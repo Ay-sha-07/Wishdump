@@ -132,7 +132,7 @@ export default function PostWish({ onClose, onSubmit }: PostWishProps) {
   }}
   className="w-full bg-black/50 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-blue-300 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
 />
-        
+
           </div>
 
           <button
