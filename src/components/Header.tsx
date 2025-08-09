@@ -18,7 +18,7 @@ export default function Header({ onPostWish }: HeaderProps) {
             </div>
             <div>
               <h1 className="text-3xl font-bold gradient-text animate-slideInLeft">
-                Wishdump
+                WishGenie
               </h1>
               <p className="text-blue-200 text-sm animate-fadeInUp">where dreams meet reality ✨</p>
             </div>
