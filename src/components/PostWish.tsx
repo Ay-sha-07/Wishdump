@@ -115,15 +115,24 @@ export default function PostWish({ onClose, onSubmit }: PostWishProps) {
 
           <div>
             <label className="block text-sm font-medium text-blue-200 mb-2">
-              Image URL (optional but slay 📸)
-            </label>
-            <input
-              type="url"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              className="w-full bg-black/50 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-blue-300 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
-              placeholder="https://example.com/your-dream-image.jpg"
-            />
+  Upload Image (optional but slay 📸)
+</label>
+<input
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageUrl(reader.result as string); // store base64 data in state
+      };
+      reader.readAsDataURL(file);
+    }
+  }}
+  className="w-full bg-black/50 border border-blue-500/30 rounded-lg px-4 py-3 text-white placeholder-blue-300 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400/50 transition-all duration-300"
+/>
+        
           </div>
 
           <button
