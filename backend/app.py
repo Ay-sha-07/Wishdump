@@ -4,35 +4,49 @@ from supabase import create_client
 import os
 
 app = Flask(__name__)
-CORS(app)  # Allow requests from your React frontend
+CORS(app)
 
-# Supabase credentials
-SUPABASE_URL = "https://glwbbbhkdjvrlyxkbagr.supabase.co"
-SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdsd2JiYmhrZGp2cmx5eGtiYWdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQ3MzUxNzYsImV4cCI6MjA3MDMxMTE3Nn0.Dfg4nKx9FK2qG568YZeKJvtgCF40mew0tiPgOQY-bI8"
-
+# ✅ Use environment variables instead of hardcoding
+SUPABASE_URL = os.getenv("SUPABASE_URL", "https://glwbbbhkdjvrlyxkbagr.supabase.co")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY", "")
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
-@app.route("/add_wish", methods=["POST"])
+# POST route → add a wish
+@app.route("/api/wishes", methods=["POST"])
 def add_wish():
     try:
         data = request.get_json()
-        wish = data.get("wish")
+        text = data.get("text")
+        author = data.get("author", "Anonymous")
         image_url = data.get("image_url")
 
-        if not wish:
+        if not text:
             return jsonify({"error": "Wish text is required"}), 400
 
-        # Insert into Supabase table "wishes"
         response = supabase.table("wishes").insert({
-            "wish": wish,
+            "text": text,
+            "author": author,
             "image_url": image_url
         }).execute()
 
-        return jsonify({"message": "Wish added successfully", "data": response.data}), 201
+        if response.data:
+            return jsonify({"message": "Wish added successfully", "data": response.data}), 201
+        else:
+            return jsonify({"error": str(response.error)}), 500
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# GET route → fetch all wishes
+@app.route("/api/wishes", methods=["GET"])
+def get_wishes():
+    try:
+        response = supabase.table("wishes").select("*").order("created_at", desc=True).execute()
+        return jsonify(response.data), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# Health check
 @app.route("/")
 def home():
     return jsonify({"message": "Flask backend is running"}), 200
