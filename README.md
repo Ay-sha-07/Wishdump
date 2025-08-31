@@ -26,7 +26,7 @@ Are these needs urgent? No.
 Are they important? Absolutely not.  
 But life’s too short to not make ridiculous dreams come true.
 ## 💡 The Solution (that nobody asked for)
-Introducing **WishGrant** — the platform where generous strangers (or bored rich people) can scroll through absurd, wholesome, or life-changing wishes and grant them... anonymously.  
+Introducing **Wishdump** — the platform where generous strangers (or bored rich people) can scroll through absurd, wholesome, or life-changing wishes and grant them... anonymously.  
 
 
 ## Technical Details
