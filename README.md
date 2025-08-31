@@ -10,7 +10,7 @@
 
 ### Team Members
 - Member 1: [Ayisha Muhammed] - [SOE,Cusat]
-- Member 2: [Hannah Achu John] - [SOE,College]
+- Member 2: [Hannah Achu John] - [SOE,Cusat]
 
 ### Project Description
 A fun web platform where **anyone** can post random wishes — from *“I want a lifetime supply of bubble tea”* to *“A pink Lamborghini”*.  
